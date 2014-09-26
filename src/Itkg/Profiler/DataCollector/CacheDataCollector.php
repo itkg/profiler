@@ -20,20 +20,20 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
      */
     public function collect()
     {
-        $all = $this->getStoredDataForKey('all');
+        $all  = $this->getStoredDataForKey('all');
         $data = array();
         foreach (self::$collectedData as $key => $values) {
             $values = array(
-                'name'         => $key,
-                'load'         => (isset($values['load'])) ? $values['load'] : 0,
-                'set'          => (isset($values['set'])) ? $values['set'] : 0,
-                'size'         => (isset($values['size'])) ? $values['size'] : '?'
+                'name' => $key,
+                'load' => (isset($values['load'])) ? $values['load'] : 0,
+                'set'  => (isset($values['set'])) ? $values['set'] : 0,
+                'size' => (isset($values['size'])) ? $values['size'] : '?'
             );
 
             if (isset($all[$key])) {
-                $all[$key]['load']  +=  $values['load'];
-                $all[$key]['set']   +=  $values['set'];
-                $all[$key]['size']   =  $values['size'];
+                $all[$key]['load'] += $values['load'];
+                $all[$key]['set'] += $values['set'];
+                $all[$key]['size'] = $values['size'];
             } else {
                 $all[$key] = $values;
             }
@@ -62,7 +62,7 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     {
         $key = $event->getCachabledata()->getHashKey();
         if (isset(self::$collectedData[$key]['load'])) {
-            self::$collectedData[$key]['load'] ++;
+            self::$collectedData[$key]['load']++;
         } else {
             self::$collectedData[$key]['load'] = 1;
         }
@@ -79,7 +79,7 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     {
         $key = $event->getCachabledata()->getHashKey();
         if (isset(self::$collectedData[$key]['set'])) {
-            self::$collectedData[$key]['set'] ++;
+            self::$collectedData[$key]['set']++;
         } else {
             self::$collectedData[$key]['set'] = 1;
         }
@@ -95,7 +95,7 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     public function onCacheRemove(CacheEvent $event)
     {
         if (isset(self::$collectedData[$event->getKey()]['remove'])) {
-            self::$collectedData[$event->getKey()]['remove'] ++;
+            self::$collectedData[$event->getKey()]['remove']++;
         } else {
             self::$collectedData[$event->getKey()]['remove'] = 1;
         }

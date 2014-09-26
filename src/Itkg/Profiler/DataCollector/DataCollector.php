@@ -121,6 +121,7 @@ abstract class DataCollector implements DataCollectorInterface
         if (!empty($values)) { // We don't set empty data
             $this->data[$key] = $values;
         }
+
         return $this;
     }
 

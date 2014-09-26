@@ -24,7 +24,7 @@ class Finder
 
         $directory = dirname($reflector->getFileName());
 
-        if(file_exists($baseFile = sprintf('%s/%s/base.php.html', $directory, self::VIEWS_PATH))) {
+        if (file_exists($baseFile = sprintf('%s/%s/base.php.html', $directory, self::VIEWS_PATH))) {
             return $baseFile;
         }
 
@@ -44,7 +44,10 @@ class Finder
 
         $directory = dirname($reflector->getFileName());
 
-        if(file_exists($baseFile = sprintf('%s/%s/collector/%s.html.php', $directory, self::VIEWS_PATH, $collector->getName()))) {
+        if (file_exists(
+            $baseFile = sprintf('%s/%s/collector/%s.html.php', $directory, self::VIEWS_PATH, $collector->getName())
+        )
+        ) {
             return $baseFile;
         }
 
