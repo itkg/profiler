@@ -1,6 +1,6 @@
 filter:
     path: [src/*]
-    excluded_paths: [vendor/*, tests/*]
+    excluded_paths: [vendor/*, tests/*, src/Resources/*]
 tools:
     external_code_coverage: true
     php_mess_detector:
@@ -12,6 +12,7 @@ tools:
                 paths: {  }
                 excluded_paths:
                     - 'tests/*'
+                    - 'src/Resources/*'
                     - 'vendor/*'
             config:
                 rulesets:
@@ -42,9 +43,10 @@ tools:
             excluded_paths:
                 - 'tests/*'
                 - 'vendor/*'
+                - 'src/Resources/*'
     php_pdepend: true
     php_cpd:
        enabled: true
-       excluded_dirs: [vendor, tests]
+       excluded_dirs: [vendor, tests, src/Resources]
 before_commands:
     - "composer install --dev --prefer-source"
