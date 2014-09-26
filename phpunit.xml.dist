@@ -38,8 +38,12 @@
             <directory>./src/Resources</directory>
             <directory>./tests</directory>
         </blacklist>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+        <whitelist>
             <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory suffix=".php">./src/Resources</directory>
+
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
