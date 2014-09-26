@@ -30,7 +30,7 @@ class Installer
 
         $fs = new Filesystem();
         $fs->mirror(
-            $vendorDir . '/src/Itkg/Profiler/Resources/public',
+            __DIR__.'/Resources/public',
             //
             $extra[self::EXTRA_ASSET_DIR] . '/vendor/itkg/profiler/assets'
         );
