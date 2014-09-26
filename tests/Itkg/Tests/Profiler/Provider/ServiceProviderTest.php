@@ -12,6 +12,7 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
         $config['profiler_path'] = 'path/to/profiler/store/directory';
         $container->setConfig($config);
         define ('BASE_DIR', __DIR__);
+        $stub = $this->getMock('Itkg\Profiler\Provider\ServiceProvider');
         $container->register(new \Itkg\Profiler\Provider\ServiceProvider());
 
         // profiler & collectors
@@ -24,5 +25,9 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         // renderer
         $this->assertInstanceOf('Itkg\Profiler\Template\Finder', $container['profiler']['template_finder']);
+
+        $stub->expects($this->once())
+            ->method('register');
+        $container->register($stub);
     }
 }
