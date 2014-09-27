@@ -32,5 +32,19 @@
         return this;
     };
 
+    $.fn.archiveCollector = function(content_id) {
+
+        this.click(function() {
+            collector = $(this).attr('rel');
+            $.ajax({
+                'url': '/_/profiler/'+collector+'?action=archive',
+                dataType: 'html',
+                success : function(data){
+                    $(content_id).html(data);
+                }
+            });
+        });
+        return this;
+    };
 
 }( jQuery ));

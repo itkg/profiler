@@ -11,6 +11,7 @@
     <script src="/vendor/itkg/profiler/assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="/vendor/itkg/profiler/assets/js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/vendor/itkg/profiler/assets/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script src="/vendor/itkg/profiler/assets/js/chart.min.js" type="text/javascript"></script>
     <script src="/vendor/itkg/profiler/assets/js/profiler.js" type="text/javascript"></script>
 </head>
 <body>

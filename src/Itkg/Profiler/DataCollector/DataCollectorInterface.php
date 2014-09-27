@@ -40,4 +40,12 @@ interface DataCollectorInterface
      * @return void
      */
     public function clear();
-} 
+
+    /**
+     * Archive current data
+     *
+     * @return mixed
+     */
+    public function archive();
+
+}

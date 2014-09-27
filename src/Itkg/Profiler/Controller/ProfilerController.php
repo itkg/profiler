@@ -56,6 +56,8 @@ class ProfilerController
 
         if ($this->request->query->get('action') == 'clear') {
             $collector->clear();
+        } elseif($this->request->query->get('action') == 'archive') {
+            $collector->archive();
         }
 
         return $this->render(

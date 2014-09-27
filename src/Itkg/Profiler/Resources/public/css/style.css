@@ -439,3 +439,14 @@ td.numeric {
 .tooltip {
     cursor:pointer;
 }
+
+.right a {
+    text-decoration: none;
+}
+
+canvas {
+    height: 380px;
+    margin: 5px;
+    padding: 0;
+    width: 950px;
+}

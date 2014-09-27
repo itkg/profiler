@@ -31,8 +31,11 @@ abstract class DataCollector implements DataCollectorInterface
      */
     public function __construct($profilerPath)
     {
-        $this->path = sprintf('%s/%s/%s', BASE_DIR, $profilerPath, $this->getName());
-
+        $this->path = sprintf('%s/%s/%s/current', BASE_DIR, $profilerPath, $this->getName());
+        $directory = sprintf('%s/%s/%s', BASE_DIR, $profilerPath, $this->getName());
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
         $this->data = $this->getStoredData();
     }
 
@@ -59,6 +62,55 @@ abstract class DataCollector implements DataCollectorInterface
         }
     }
 
+    /**
+     * Archive current data
+     *
+     * @return void
+     */
+    public function archive()
+    {
+        /**
+         * @fixme : change archive name strategy
+         */
+        $path = str_replace('current',  date('Y_m_d_H_i'), $this->path);
+        file_put_contents($path, $this->data);
+        /**
+         * @fixme : change createStats place
+         */
+        $key = date('d/m/Y à h:i');
+        $stats = array();
+        foreach ($this->data as $k => $data) {
+            $stats[$k][$key] = array(
+                'date' => $key,
+                'count' => sizeof($data),
+            );
+        }
+
+        $this->saveStats($stats);
+        $this->clear();
+    }
+
+    /**
+     * @param string $key
+     * @return array
+     */
+    public function getStats($key = null)
+    {
+        $path = str_replace('current', 'statistics', $this->path);
+        $stats = array();
+        if (file_exists($path)) {
+            $stats = json_decode(file_get_contents($path), true);
+        }
+
+        if (null !== $key) {
+            if (isset($stats[$key])) {
+               return $stats[$key];
+            }
+            return array();
+        }
+
+        return $stats;
+    }
     /**
      * @return array
      */
@@ -125,6 +177,16 @@ abstract class DataCollector implements DataCollectorInterface
         return $this;
     }
 
+    /**
+     * @param array $stats
+     */
+    private function saveStats(array $stats = array())
+    {
+        $path = str_replace('current', 'statistics', $this->path);
+        $currentStats = $this->getStats();
+        file_put_contents($path, json_encode(array_merge_recursive ($currentStats, $stats)));
+
+    }
     /**
      * @return string
      */
