@@ -63,12 +63,8 @@ class FileStorage implements StorageInterface
      */
     public function archive(DataCollectorInterface $collector)
     {
-        $this->load($collector);
         $path = sprintf('%s/%s/%s', $this->path, $collector->getName(), date('d_m_Y_h_i'));
         file_put_contents($path, json_encode($collector->getData()));
-
-        $this->saveStats($collector);
-        $this->clear($collector);
     }
 
     /**

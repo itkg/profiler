@@ -6,6 +6,7 @@ use Itkg\Core\Provider\ServiceProviderInterface;
 use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\DataCollector\DatabaseDataCollector;
 use Itkg\Profiler\Listener\ProfilerListener;
+use Itkg\Profiler\Manager\ProfilerManager;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Storage\FileStorage;
 use Itkg\Profiler\Template\Finder;
@@ -38,6 +39,14 @@ class ServiceProvider implements ServiceProviderInterface
                 $profiler->addCollector($container['collector.database']);
 
                 return $profiler;
+            }
+        );
+
+        $container['profiler_manager'] = $mainContainer->share(
+            function ($container) use ($mainContainer) {
+                return new ProfilerManager(
+                    $container['profiler']
+                );
             }
         );
 

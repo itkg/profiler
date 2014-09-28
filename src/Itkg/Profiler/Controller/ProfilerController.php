@@ -4,6 +4,7 @@ namespace Itkg\Profiler\Controller;
 
 
 use Itkg\Core\ServiceContainer;
+use Itkg\Profiler\Manager\ProfilerManager;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Template\Finder;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,19 +53,17 @@ class ProfilerController
         /**
          * @var Profiler
          */
-        $profiler = $this->container['profiler']['profiler'];
         $key = $this->request->attributes->get('route_params')['params']['collector'];
 
-        // Create collector Factory ?
         $collector = $this->container['profiler']['collector.' . $key];
 
+        $this->getProfilerManager()->loadCollector($collector);
         if ($this->request->query->get('action') == 'clear') {
-            $profiler->getStorage()->clear($collector);
+            $this->getProfilerManager()->clearCollector($collector);
         } elseif($this->request->query->get('action') == 'archive') {
-            $profiler->getStorage()->archive($collector);
+            $this->getProfilerManager()->archiveCollector($collector);
         }
 
-        $profiler->getStorage()->load($collector);
         return $this->render(
             $this->getTemplateFinder()->getCollectorPath($collector),
             array(
@@ -128,5 +127,13 @@ class ProfilerController
     private function getTemplateFinder()
     {
         return $this->container['profiler']['template_finder'];
+    }
+
+    /**
+     * @return ProfilerManager
+     */
+    private function getProfilerManager()
+    {
+        return $this->container['profiler']['profiler_manager'];
     }
 }
