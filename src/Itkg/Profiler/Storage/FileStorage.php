@@ -72,8 +72,12 @@ class FileStorage implements StorageInterface
      */
     public function clear(DataCollectorInterface $collector)
     {
+        $path = sprintf('%s/%s/%s', $this->path, $collector->getName(), $this->filename);
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
         $collector->setData(array());
-        $this->save($collector);
     }
 
     /**
@@ -82,7 +86,7 @@ class FileStorage implements StorageInterface
      */
     public function setPath($path)
     {
-        $this->path = $path;
+        $this->path = BASE_DIR.$path;
 
         return $this;
     }

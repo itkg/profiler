@@ -8,7 +8,7 @@ use Itkg\Profiler\Profiler;
 
 class Finder
 {
-    const VIEWS_PATH = '/../Resources/views/';
+    const VIEWS_PATH = 'Resources/views';
 
     /**
      * Return base template path
@@ -23,12 +23,11 @@ class Finder
         $reflector = new \ReflectionObject($profiler);
 
         $directory = dirname($reflector->getFileName());
-
-        if (file_exists($baseFile = sprintf('%s/%s/base.php.html', $directory, self::VIEWS_PATH))) {
+        if (file_exists($baseFile = sprintf('%s/%s/base.html.php', $directory, self::VIEWS_PATH))) {
             return $baseFile;
         }
 
-        return sprintf('%s/%s/base.html.php', __DIR__, self::VIEWS_PATH);
+        return sprintf('%s/../%s/base.html.php', __DIR__, self::VIEWS_PATH);
     }
 
     /**
@@ -45,12 +44,12 @@ class Finder
         $directory = dirname($reflector->getFileName());
 
         if (file_exists(
-            $baseFile = sprintf('%s/%s/collector/%s.html.php', $directory, self::VIEWS_PATH, $collector->getName())
+            $baseFile = sprintf('%s/../%s/collector/%s.html.php', $directory, self::VIEWS_PATH, $collector->getName())
         )
         ) {
             return $baseFile;
         }
 
-        throw new NotFoundException('No template defined for %s collector', $collector->getName());
+        throw new NotFoundException(sprintf('No template defined for %s collector', $collector->getName()));
     }
 }

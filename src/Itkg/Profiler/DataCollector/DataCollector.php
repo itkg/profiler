@@ -19,7 +19,7 @@ abstract class DataCollector implements DataCollectorInterface
     /**
      * @var Request
      */
-    protected $request;
+    private $request;
 
     /**
      * @var array
@@ -46,6 +46,17 @@ abstract class DataCollector implements DataCollectorInterface
         return $this->data;
     }
 
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if (null === $this->request) {
+            $this->request = Request::createFromGlobals();
+        }
+
+        return $this->request;
+    }
     /**
      * @param Request $request
      * @return $this
@@ -76,11 +87,8 @@ abstract class DataCollector implements DataCollectorInterface
      */
     protected function addData(array $values = array(), $key = null)
     {
-        if (!$this->request) {
-            $this->request = Request::createFromGlobals();
-        }
         if (null == $key) {
-            $key = $this->request->getPathInfo();
+            $key = $this->getRequest()->getPathInfo();
         }
 
         if (!empty($values)) { // We don't set empty data
