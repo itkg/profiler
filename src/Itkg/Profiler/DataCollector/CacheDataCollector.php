@@ -88,20 +88,6 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     }
 
     /**
-     * Store cache remove information
-     *
-     * @param $event
-     */
-    public function onCacheRemove(CacheEvent $event)
-    {
-        if (isset(self::$collectedData[$event->getKey()]['remove'])) {
-            self::$collectedData[$event->getKey()]['remove']++;
-        } else {
-            self::$collectedData[$event->getKey()]['remove'] = 1;
-        }
-    }
-
-    /**
      * Returns the events to which this class has subscribed.
      *
      * Return format:
