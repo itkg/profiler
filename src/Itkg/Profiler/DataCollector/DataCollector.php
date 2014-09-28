@@ -15,16 +15,14 @@ abstract class DataCollector implements DataCollectorInterface
      * @var array
      */
     protected $data = array();
-
-    /**
-     * @var Request
-     */
-    private $request;
-
     /**
      * @var array
      */
     protected $stats = array();
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * @param string $key
@@ -33,7 +31,7 @@ abstract class DataCollector implements DataCollectorInterface
     public function getStatsForKey($key)
     {
         if (isset($this->stats[$key])) {
-           return $this->stats[$key];
+            return $this->stats[$key];
         }
         return array();
     }
@@ -44,56 +42,6 @@ abstract class DataCollector implements DataCollectorInterface
     public function getData()
     {
         return $this->data;
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if (null === $this->request) {
-            $this->request = Request::createFromGlobals();
-        }
-
-        return $this->request;
-    }
-    /**
-     * @param Request $request
-     * @return $this
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
-
-        return $this;
-    }
-
-    /**
-     * @param $key
-     * @return array
-     */
-    protected function getDataForKey($key)
-    {
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
-        }
-
-        return array();
-    }
-
-    /**
-     * @param array $values
-     * @param null $key
-     */
-    protected function addData(array $values = array(), $key = null)
-    {
-        if (null == $key) {
-            $key = $this->getRequest()->getPathInfo();
-        }
-
-        if (!empty($values)) { // We don't set empty data
-            $this->data[$key] = $values;
-        }
     }
 
     /**
@@ -132,14 +80,6 @@ abstract class DataCollector implements DataCollectorInterface
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return ucfirst($this->getName());
-    }
-
-    /**
      * Create stats from current set of data
      */
     private function createStats()
@@ -151,5 +91,64 @@ abstract class DataCollector implements DataCollectorInterface
                 'count' => sizeof($data),
             );
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return ucfirst($this->getName());
+    }
+
+    /**
+     * @param string $key
+     * @return array
+     */
+    protected function getDataForKey($key)
+    {
+        if (isset($this->data[$key])) {
+            return $this->data[$key];
+        }
+
+        return array();
+    }
+
+    /**
+     * @param array $values
+     * @param string $key
+     */
+    protected function addData(array $values = array(), $key = null)
+    {
+        if (null == $key) {
+            $key = $this->getRequest()->getPathInfo();
+        }
+
+        if (!empty($values)) { // We don't set empty data
+            $this->data[$key] = $values;
+        }
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if (null === $this->request) {
+            $this->request = Request::createFromGlobals();
+        }
+
+        return $this->request;
+    }
+
+    /**
+     * @param Request $request
+     * @return $this
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+
+        return $this;
     }
 }

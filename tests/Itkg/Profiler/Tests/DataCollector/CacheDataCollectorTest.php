@@ -27,6 +27,8 @@ class CacheDataCollectorTest extends \PHPUnit_Framework_TestCase
         $event = new CacheEvent(new CachableData('key_1', 86400, 'Cache content'));
         $collector->onCacheLoad($event);
 
+        $collector->onCacheLoad($event);
+
         $event = new CacheEvent(new CachableData('key_3', 86400, 'Cache content 3'));
         $collector->onCacheLoad($event);
 
@@ -40,7 +42,7 @@ class CacheDataCollectorTest extends \PHPUnit_Framework_TestCase
             'all' => array(
                 'key_1' => array(
                     'size' => strlen('Cache content'),
-                    'load' => 2,
+                    'load' => 3,
                     'set'  => 1,
                     'name' => 'key_1'
                 ),
@@ -62,7 +64,7 @@ class CacheDataCollectorTest extends \PHPUnit_Framework_TestCase
                 0 => array(
                     'name' => 'key_1',
                     'size' => strlen('Cache content'),
-                    'load' => 1,
+                    'load' => 2,
                     'set'  => 0
                 ),
                 1 => array(
