@@ -6,6 +6,7 @@ use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\DataCollector\DatabaseDataCollector;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Storage\FileStorage;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProfilerTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,6 +15,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         $storage = new FileStorage(__DIR__);
         $profiler = new Profiler($storage);
         $this->assertEquals($storage, $profiler->getStorage());
+        $this->assertEquals($profiler, $profiler->setStorage($storage));
     }
 
     public function testCollectors()
@@ -36,5 +38,19 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
 
         $profiler->setCollectors($collectors);
         $this->assertEquals($collectors, $profiler->getCollectors());
+    }
+
+    public function testProfile()
+    {
+        $collectorStub = $this->getMock('Itkg\Profiler\DataCollector\CacheDataCollector');
+        $storageStub   = $this->getMock('Itkg\Profiler\Storage\FileStorage', array(), array('data'));
+
+        $profiler = new Profiler($storageStub);
+        $profiler->addCollector($collectorStub);
+
+        $collectorStub->expects($this->once())->method('collect');
+        $storageStub->expects($this->once())->method('load');
+        $storageStub->expects($this->once())->method('save');
+        $profiler->profile(Request::createFromGlobals());
     }
 } 
