@@ -64,11 +64,11 @@ class DatabaseDataCollector extends DataCollector implements EventSubscriberInte
      */
     public function onPostQueryExecute(DatabaseEvent $event)
     {
-        $data                  = $event->getData();
+        $data = $event->getData();
         self::$collectedData[] = array(
-            'query'         => $event->getQuery(),
+            'query' => $event->getQuery(),
             'executionTime' => $event->getExecutionTime(),
-            'bind'          => $data['bind']
+            'bind' => $data['bind']
         );
     }
 }

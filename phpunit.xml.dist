@@ -41,8 +41,7 @@
         <whitelist>
             <directory suffix=".php">./src</directory>
             <exclude>
-                <directory suffix=".php">./src/Resources</directory>
-
+                <directory>./src/Resources/*</directory>
             </exclude>
         </whitelist>
     </filter>

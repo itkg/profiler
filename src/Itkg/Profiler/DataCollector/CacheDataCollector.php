@@ -20,13 +20,13 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
      */
     public function collect()
     {
-        $all  = $this->getDataForKey('all');
+        $all = $this->getDataForKey('all');
         $data = array();
         foreach (self::$collectedData as $key => $values) {
             $values = array(
                 'name' => $key,
                 'load' => (isset($values['load'])) ? $values['load'] : 0,
-                'set'  => (isset($values['set'])) ? $values['set'] : 0,
+                'set' => (isset($values['set'])) ? $values['set'] : 0,
                 'size' => (isset($values['size'])) ? $values['size'] : '?'
             );
 
@@ -104,8 +104,8 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     public static function getSubscribedEvents()
     {
         return array(
-            'cache.load'   => 'onCacheLoad',
-            'cache.set'    => 'onCacheSet',
+            'cache.load' => 'onCacheLoad',
+            'cache.set' => 'onCacheSet',
             'cache.remove' => 'onCacheRemove'
         );
     }

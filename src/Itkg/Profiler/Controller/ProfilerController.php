@@ -60,7 +60,7 @@ class ProfilerController
         $this->getProfilerManager()->loadCollector($collector);
         if ($this->request->query->get('action') == 'clear') {
             $this->getProfilerManager()->clearCollector($collector);
-        } elseif($this->request->query->get('action') == 'archive') {
+        } elseif ($this->request->query->get('action') == 'archive') {
             $this->getProfilerManager()->archiveCollector($collector);
         }
 

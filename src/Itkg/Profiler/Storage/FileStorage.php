@@ -25,7 +25,7 @@ class FileStorage implements StorageInterface
      */
     public function __construct($path)
     {
-        $this->path = BASE_DIR.$path;
+        $this->path = BASE_DIR . $path;
         if (!is_dir($this->path)) {
             mkdir($this->path, 0777, true);
         }
@@ -86,7 +86,7 @@ class FileStorage implements StorageInterface
      */
     public function setPath($path)
     {
-        $this->path = BASE_DIR.$path;
+        $this->path = BASE_DIR . $path;
 
         return $this;
     }
