@@ -29,7 +29,7 @@ class DatabaseDataCollector extends DataCollector implements EventSubscriberInte
      */
     public function collect()
     {
-        $this->setData(self::$collectedData);
+        $this->addData(self::$collectedData);
     }
 
     /**

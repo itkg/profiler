@@ -16,4 +16,4 @@ interface ProfilerInterface
      * @return void
      */
     public function profile(Request $request);
-} 
+}

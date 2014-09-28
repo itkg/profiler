@@ -4,6 +4,7 @@ namespace Itkg\Profiler;
 
 use Itkg\Profiler\DataCollector\DataCollector;
 use Itkg\Profiler\DataCollector\DataCollectorInterface;
+use Itkg\Profiler\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,6 +15,15 @@ class Profiler implements ProfilerInterface
      */
     private $collectors = array();
 
+    /**
+     * @var StorageInterface
+     */
+    private $storage;
+
+    public function __construct(StorageInterface $storage)
+    {
+        $this->storage = $storage;
+    }
 
     /**
      * @param DataCollectorInterface $collector
@@ -32,6 +42,25 @@ class Profiler implements ProfilerInterface
     public function getCollectors()
     {
         return $this->collectors;
+    }
+
+    /**
+     * @return StorageInterface
+     */
+    public function getStorage()
+    {
+        return $this->storage;
+    }
+
+    /**
+     * @param StorageInterface $storage
+     * @return $this
+     */
+    public function setStorage(StorageInterface $storage)
+    {
+        $this->storage = $storage;
+
+        return $this;
     }
 
     /**
@@ -59,10 +88,16 @@ class Profiler implements ProfilerInterface
             if ($collector instanceof DataCollector) {
                 $collector->setRequest($request);
             }
+            // Get data from storage
+            $this->storage->load($collector);
+
             // Start collect data
             $collector->collect();
 
-            $collector->save();
+            // Set storage data
+            $this->storage->save($collector);
+
+            // Stats ?
         }
     }
 }

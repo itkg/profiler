@@ -7,6 +7,7 @@ use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\DataCollector\DatabaseDataCollector;
 use Itkg\Profiler\Listener\ProfilerListener;
 use Itkg\Profiler\Profiler;
+use Itkg\Profiler\Storage\FileStorage;
 use Itkg\Profiler\Template\Finder;
 
 
@@ -29,8 +30,10 @@ class ServiceProvider implements ServiceProviderInterface
         $container = new \Pimple();
 
         $container['profiler'] = $mainContainer->share(
-            function () use ($container) {
-                $profiler = new Profiler();
+            function ($container) use ($mainContainer) {
+                $profiler = new Profiler(
+                    new FileStorage($mainContainer['config']->get('profiler_path'))
+                );
                 $profiler->addCollector($container['collector.cache']);
                 $profiler->addCollector($container['collector.database']);
 
@@ -39,14 +42,14 @@ class ServiceProvider implements ServiceProviderInterface
         );
 
         $container['collector.cache'] = $mainContainer->share(
-            function () use ($mainContainer) {
-                return new CacheDataCollector($mainContainer['config']->get('profiler_path'));
+            function () {
+                return new CacheDataCollector();
             }
         );
 
         $container['collector.database'] = $mainContainer->share(
-            function () use ($mainContainer) {
-                return new DatabaseDataCollector($mainContainer['config']->get('profiler_path'));
+            function () {
+                return new DatabaseDataCollector();
             }
         );
 

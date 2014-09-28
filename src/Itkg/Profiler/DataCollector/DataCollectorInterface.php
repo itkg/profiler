@@ -23,11 +23,6 @@ interface DataCollectorInterface
     public function collect();
 
     /**
-     * Save data (you may want to store data in file or DB)
-     */
-    public function save();
-
-    /**
      * Get data
      *
      * @return array
@@ -35,17 +30,20 @@ interface DataCollectorInterface
     public function getData();
 
     /**
-     * Clear stored data
-     *
-     * @return void
+     * @param array $data
+     * @return $this
      */
-    public function clear();
+    public function setData(array $data = array());
 
     /**
-     * Archive current data
-     *
-     * @return mixed
+     * @return array
      */
-    public function archive();
+    public function getStats();
+
+    /**
+     * @param array $stats
+     * @return $this
+     */
+    public function setStats(array $stats = array());
 
 }

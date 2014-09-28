@@ -39,7 +39,7 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php if (sizeof($stats = $collector->getStats($key)) > 1) : ?>
+            <?php if (sizeof($stats = $collector->getStatsForKey($key)) > 1) : ?>
                 <canvas id="<?= $key ?>_chart" width="950" height="380"></canvas>
 
                 <script type="text/javascript">
@@ -48,7 +48,7 @@
                     var _labels = new Array();
                     var _data = new Array();
                     <?php $i = 0; ?>
-                    <?php foreach ($collector->getStats($key) as $stat) : ?>
+                    <?php foreach ($stats as $stat) : ?>
                     _labels[<?= $i ?>] = "<?= $stat['date'] ?>";
                     _data[<?= $i ?>]   = <?= $stat['count'] ?>;
                     <?php $i++; ?>

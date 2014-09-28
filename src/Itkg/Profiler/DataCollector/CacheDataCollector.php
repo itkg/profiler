@@ -20,7 +20,7 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
      */
     public function collect()
     {
-        $all  = $this->getStoredDataForKey('all');
+        $all  = $this->getDataForKey('all');
         $data = array();
         foreach (self::$collectedData as $key => $values) {
             $values = array(
@@ -39,8 +39,8 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
             }
             $data[] = $values;
         }
-        $this->setData($all, 'all');
-        $this->setData($data);
+        $this->addData($all, 'all');
+        $this->addData($data);
     }
 
     /**
