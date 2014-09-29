@@ -118,7 +118,9 @@ class FileStorage implements StorageInterface
         $archives = array();
 
         foreach (new \DirectoryIterator($path) as $i => $fileInfo) {
-            if($fileInfo->isDot() || $fileInfo->getFilename() == 'statistics') continue;
+            if ($fileInfo->isDot() || $fileInfo->getFilename() == 'statistics') {
+                continue;
+            }
             $key = ($fileInfo->getFilename() == $this->filename) ? 'current' : $i;
             $archives[$key] = $fileInfo->getFilename();
         }

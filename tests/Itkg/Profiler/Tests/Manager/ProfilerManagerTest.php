@@ -50,4 +50,14 @@ class ProfilerManagerTest extends \PHPUnit_Framework_TestCase
 
         $manager->loadCollector(new CacheDataCollector());
     }
+
+    public function testGetCollectorArchives()
+    {
+        $storage = $this->getMock('Itkg\Profiler\Storage\FileStorage', array(), array('data'));
+        $manager = new ProfilerManager(new Profiler($storage));
+
+        $storage->expects($this->once())->method('getArchives');
+
+        $manager->getCollectorArchives(new CacheDataCollector());
+    }
 }

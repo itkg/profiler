@@ -74,4 +74,16 @@ class FileStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data, $collector->getData());
 
     }
+
+    public function testGetArchives()
+    {
+        $storage = new FileStorage('data');
+        $collector = new CacheDataCollector();
+        $archives = $storage->getArchives($collector);
+
+        $this->assertCount(2, $archives);
+        $this->assertArrayHasKey('current', $archives);
+        $this->assertNotContains('statistics', $archives);
+
+    }
 } 

@@ -85,4 +85,28 @@ class CacheDataCollectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result, $collector->getData());
 
     }
+
+    public function test__toString()
+    {
+        $collector = new CacheDataCollector();
+
+        $this->assertEquals('Cache', (string) $collector);
+    }
+
+    public function testRequestNotSet()
+    {
+        $collector = new CacheDataCollector();
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Request', $collector->getRequest());
+    }
+
+    public function testStats()
+    {
+        $collector = new CacheDataCollector();
+        $this->assertEquals(array(), $collector->getStatsForKey(null));
+        $key = $collector->getRequest()->getPathInfo();
+        $collector->setData(array($key => array('test')));
+        
+        $this->assertArrayHasKey($key, $collector->getStats());
+        $this->assertNotEmpty($collector->getStatsForKey($key));
+    }
 } 
