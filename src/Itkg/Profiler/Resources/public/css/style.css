@@ -450,3 +450,13 @@ canvas {
     padding: 0;
     width: 100%;
 }
+
+#archives {
+
+    width: 200px;
+
+    overflow: hidden;
+    background: right #ddd;
+    border: 1px solid #ccc;
+
+}

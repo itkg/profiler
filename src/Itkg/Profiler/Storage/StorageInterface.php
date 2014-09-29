@@ -8,9 +8,10 @@ interface StorageInterface
 {
     /**
      * @param DataCollectorInterface $collector
+     * @param string $current
      * @return void
      */
-    public function load(DataCollectorInterface $collector);
+    public function load(DataCollectorInterface $collector, $current = 'current');
 
     /**
      * @param DataCollectorInterface $collector
@@ -36,4 +37,9 @@ interface StorageInterface
      * @return void
      */
     public function saveStats(DataCollectorInterface $collector);
+
+    /**
+     * @return array
+     */
+    public function getArchives(DataCollectorInterface $collector);
 }

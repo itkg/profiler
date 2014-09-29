@@ -4,6 +4,7 @@ namespace Itkg\Profiler\Controller;
 
 
 use Itkg\Core\ServiceContainer;
+use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\Manager\ProfilerManager;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Template\Finder;
@@ -50,6 +51,7 @@ class ProfilerController
      */
     public function collectorsAction()
     {
+
         /**
          * @var Profiler
          */
@@ -57,7 +59,7 @@ class ProfilerController
 
         $collector = $this->container['profiler']['collector.' . $key];
 
-        $this->getProfilerManager()->loadCollector($collector);
+        $this->getProfilerManager()->loadCollector($collector, $this->request->query->get('archive', 'current'));
         if ($this->request->query->get('action') == 'clear') {
             $this->getProfilerManager()->clearCollector($collector);
         } elseif ($this->request->query->get('action') == 'archive') {
@@ -67,7 +69,8 @@ class ProfilerController
         return $this->render(
             $this->getTemplateFinder()->getCollectorPath($collector),
             array(
-                'collector' => $collector
+                'collector' => $collector,
+                'archives'  => $this->getProfilerManager()->getCollectorArchives($collector)
             )
         );
     }

@@ -33,9 +33,11 @@ class FileStorage implements StorageInterface
 
     /**
      * @param DataCollectorInterface $collector
+     * @param string $current
      */
-    public function load(DataCollectorInterface $collector)
+    public function load(DataCollectorInterface $collector, $current = 'current')
     {
+        $this->filename = $current;
         $path = sprintf('%s/%s/%s', $this->path, $collector->getName(), $this->filename);
         $data = array();
         if (file_exists($path)) {
@@ -101,6 +103,27 @@ class FileStorage implements StorageInterface
         $path = sprintf('%s/%s/%s', $this->path, $collector->getName(), $this->statsFilename);
 
         file_put_contents($path, json_encode($collector->getStats()));
+    }
+
+    /**
+     * Get collector archives
+     *
+     * @param DataCollectorInterface $collector
+     * @return array
+     */
+    public function getArchives(DataCollectorInterface $collector)
+    {
+        $path = sprintf('%s/%s', $this->path, $collector->getName());
+
+        $archives = array();
+
+        foreach (new \DirectoryIterator($path) as $i => $fileInfo) {
+            if($fileInfo->isDot() || $fileInfo->getFilename() == 'statistics') continue;
+            $key = ($fileInfo->getFilename() == $this->filename) ? 'current' : $i;
+            $archives[$key] = $fileInfo->getFilename();
+        }
+
+        return $archives;
     }
 
     /**

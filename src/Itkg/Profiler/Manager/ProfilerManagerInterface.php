@@ -19,8 +19,15 @@ interface ProfilerManagerInterface
 
     /**
      * @param DataCollectorInterface $collector
+     * @return array
      */
-    public function loadCollector(DataCollectorInterface $collector);
+    public function getCollectorArchives(DataCollectorInterface $collector);
+
+    /**
+     * @param DataCollectorInterface $collector
+     * @param string $current
+     */
+    public function loadCollector(DataCollectorInterface $collector, $current = 'current');
 
     /**
      * @param DataCollectorInterface $collector

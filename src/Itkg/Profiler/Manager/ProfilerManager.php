@@ -42,10 +42,20 @@ class ProfilerManager implements ProfilerManagerInterface
 
     /**
      * @param DataCollectorInterface $collector
+     * @return array
      */
-    public function loadCollector(DataCollectorInterface $collector)
+    public function getCollectorArchives(DataCollectorInterface $collector)
     {
-        $this->profiler->getStorage()->load($collector);
+        return $this->profiler->getStorage()->getArchives($collector);
+    }
+
+    /**
+     * @param DataCollectorInterface $collector
+     * @param string $current
+     */
+    public function loadCollector(DataCollectorInterface $collector, $current = 'current')
+    {
+        $this->profiler->getStorage()->load($collector, $current);
     }
 
     /**
