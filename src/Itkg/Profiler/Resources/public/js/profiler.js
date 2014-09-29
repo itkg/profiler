@@ -4,8 +4,9 @@
 
         this.click(function() {
             collector = $(this).attr('rel');
-            $(this).parent().addClass('selected');
             $(this).parent().parent().children().removeClass('selected');
+            $(this).parent().addClass('selected');
+
             $.ajax({
                'url': '/_/profiler/'+collector,
                 dataType: 'html',
