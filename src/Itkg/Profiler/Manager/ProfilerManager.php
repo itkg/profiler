@@ -35,8 +35,8 @@ class ProfilerManager implements ProfilerManagerInterface
     public function archiveCollector(DataCollectorInterface $collector)
     {
         $storage = $this->profiler->getStorage();
-        $storage->archive($collector);
         $storage->saveStats($collector);
+        $storage->archive($collector);
         $storage->clear($collector);
     }
 

@@ -60,14 +60,14 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
      */
     public function onCacheLoad(CacheEvent $event)
     {
-        $key = $event->getCachabledata()->getHashKey();
+        $key = $event->getCacheabledata()->getHashKey();
         if (isset(self::$collectedData[$key]['load'])) {
             self::$collectedData[$key]['load']++;
         } else {
             self::$collectedData[$key]['load'] = 1;
         }
 
-        self::$collectedData[$key]['size'] = strlen($event->getCachabledata()->getDataForCache());
+        self::$collectedData[$key]['size'] = strlen($event->getCacheabledata()->getDataForCache());
     }
 
     /**
@@ -77,14 +77,14 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
      */
     public function onCacheSet(CacheEvent $event)
     {
-        $key = $event->getCachabledata()->getHashKey();
+        $key = $event->getCacheabledata()->getHashKey();
         if (isset(self::$collectedData[$key]['set'])) {
             self::$collectedData[$key]['set']++;
         } else {
             self::$collectedData[$key]['set'] = 1;
         }
 
-        self::$collectedData[$key]['size'] = strlen($event->getCachabledata()->getDataForCache());
+        self::$collectedData[$key]['size'] = strlen($event->getCacheabledata()->getDataForCache());
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Itkg\Profiler\Tests\DataCollector;
 
-use Itkg\Core\Cache\CachableData;
+use Itkg\Core\Cache\CacheableData;
 use Itkg\Core\Cache\Event\CacheEvent;
 use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,15 +24,15 @@ class CacheDataCollectorTest extends \PHPUnit_Framework_TestCase
         $collector = new CacheDataCollector();
         $collector->setData($data);
         $collector->setRequest(Request::create('/'));
-        $event = new CacheEvent(new CachableData('key_1', 86400, 'Cache content'));
+        $event = new CacheEvent(new CacheableData('key_1', 86400, 'Cache content'));
         $collector->onCacheLoad($event);
 
         $collector->onCacheLoad($event);
 
-        $event = new CacheEvent(new CachableData('key_3', 86400, 'Cache content 3'));
+        $event = new CacheEvent(new CacheableData('key_3', 86400, 'Cache content 3'));
         $collector->onCacheLoad($event);
 
-        $event = new CacheEvent(new CachableData('key_2', 86400, 'Cache content 2'));
+        $event = new CacheEvent(new CacheableData('key_2', 86400, 'Cache content 2'));
 
         $collector->onCacheSet($event);
         $collector->onCacheSet($event);
