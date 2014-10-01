@@ -19,7 +19,7 @@ class ProfilerListener implements EventSubscriberInterface
     /**
      * @var ProfilerInterface
      */
-    private $profiler;
+    protected $profiler;
 
     /**
      * @param ProfilerInterface $profiler
