@@ -9,6 +9,7 @@ use Itkg\Profiler\Listener\ProfilerListener;
 use Itkg\Profiler\Manager\ProfilerManager;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Storage\FileStorage;
+use Itkg\Profiler\Storage\SessionStorage;
 use Itkg\Profiler\Template\Finder;
 
 
@@ -39,6 +40,14 @@ class ServiceProvider implements ServiceProviderInterface
                 $profiler->addCollector($container['collector.database']);
 
                 return $profiler;
+            }
+        );
+
+        $container['session_storage'] = $mainContainer->share(
+            function () use ($mainContainer) {
+                return new SessionStorage(
+                    $mainContainer['session']
+                );
             }
         );
 

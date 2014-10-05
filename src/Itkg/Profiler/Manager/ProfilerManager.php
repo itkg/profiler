@@ -47,7 +47,6 @@ class ProfilerManager implements ProfilerManagerInterface
     public function getCollectorArchives(DataCollectorInterface $collector)
     {
         $archives = $this->profiler->getStorage()->getArchives($collector);
-        rsort($archives);
 
         return $archives;
     }
