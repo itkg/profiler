@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "5ca01adc43fca639c1f0f3df12a87553",
+    "hash": "2a83751ca35aa3ccdb25d02949291913",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -476,12 +477,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/itkg/core.git",
-                "reference": "52f641cf3fa113e60c83dd3bde55f9142c703212"
+                "reference": "6c6ca858289cf7882c8b980cf769b577f8ebd905"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itkg/core/zipball/52f641cf3fa113e60c83dd3bde55f9142c703212",
-                "reference": "52f641cf3fa113e60c83dd3bde55f9142c703212",
+                "url": "https://api.github.com/repos/itkg/core/zipball/6c6ca858289cf7882c8b980cf769b577f8ebd905",
+                "reference": "6c6ca858289cf7882c8b980cf769b577f8ebd905",
                 "shasum": ""
             },
             "require": {
@@ -529,7 +530,7 @@
                 "interakting",
                 "library"
             ],
-            "time": "2014-09-29 09:51:52"
+            "time": "2014-10-02 19:36:16"
         },
         {
             "name": "monolog/monolog",
@@ -1364,16 +1365,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.37",
+            "version": "3.7.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ae6cefd7cc84586a5ef27e04bae11ee940ec63dc"
+                "reference": "38709dc22d519a3d1be46849868aa2ddf822bcf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ae6cefd7cc84586a5ef27e04bae11ee940ec63dc",
-                "reference": "ae6cefd7cc84586a5ef27e04bae11ee940ec63dc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38709dc22d519a3d1be46849868aa2ddf822bcf6",
+                "reference": "38709dc22d519a3d1be46849868aa2ddf822bcf6",
                 "shasum": ""
             },
             "require": {
@@ -1433,7 +1434,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-30 12:24:19"
+            "time": "2014-10-17 09:04:17"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1485,9 +1486,7 @@
             "time": "2013-01-13 10:24:48"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "itkg/core": 20
@@ -1495,7 +1494,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

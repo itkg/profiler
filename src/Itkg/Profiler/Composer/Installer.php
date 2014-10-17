@@ -26,12 +26,9 @@ class Installer
             return;
         }
 
-        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-
         $fs = new Filesystem();
         $fs->mirror(
             __DIR__ . '/../Resources/public',
-            //
             $extra[self::EXTRA_ASSET_DIR] . '/vendor/itkg/profiler/assets'
         );
     }

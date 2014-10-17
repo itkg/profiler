@@ -4,7 +4,6 @@ namespace Itkg\Profiler\Controller;
 
 
 use Itkg\Core\ServiceContainer;
-use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\Manager\ProfilerManager;
 use Itkg\Profiler\Profiler;
 use Itkg\Profiler\Template\Finder;
@@ -118,7 +117,7 @@ class ProfilerController
 
         include $template;
         $buffer = ob_get_contents();
-        @ob_end_clean();
+        ob_end_clean();
 
         //Returns output buffer
         return new Response($buffer);

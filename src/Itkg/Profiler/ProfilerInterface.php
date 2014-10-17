@@ -3,7 +3,6 @@
 namespace Itkg\Profiler;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Interface ProfilerInterface

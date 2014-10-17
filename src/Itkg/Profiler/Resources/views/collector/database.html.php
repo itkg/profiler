@@ -24,7 +24,11 @@
                     <tr>
                         <td><div class="tooltip collector-database-query" title="<?= $row['query'] ?>"><?= $row['query'] ?></div></td>
                         <td class="numeric"><?= number_format($row['executionTime'], 5) ?></td>
-                        <td class="numeric"><div class="tooltip" title="<?php print_r($row['bind']); ?>">see</div></td>
+                        <td class="numeric"><div class="tooltip" title="|
+                        <?php foreach ($row['bind'] as $k => $v) : ?>
+                            <?= $k?> => <?= $v ?> |
+                        <?php endforeach; ?>
+                        ">see</div></td>
                         <td class="numeric"></td>
                     </tr>
                 <?php endforeach; ?>

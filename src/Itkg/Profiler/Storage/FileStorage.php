@@ -41,7 +41,7 @@ class FileStorage implements StorageInterface
         $path = sprintf('%s/%s/%s', $this->path, $collector->getName(), $this->filename);
         $data = array();
         if (file_exists($path)) {
-            $data = json_decode(file_get_contents($path), true);
+            $data = (array) json_decode(file_get_contents($path), true);
         }
         $collector->setData($data);
         $this->loadStats($collector);

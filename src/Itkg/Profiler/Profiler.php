@@ -6,7 +6,6 @@ use Itkg\Profiler\DataCollector\DataCollector;
 use Itkg\Profiler\DataCollector\DataCollectorInterface;
 use Itkg\Profiler\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class Profiler implements ProfilerInterface
 {

@@ -2,9 +2,6 @@
 
 namespace Itkg\Profiler\DataCollector;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
 /**
  * Interface DataCollectorInterface
  * @package Itkg\Profiler\DataCollector

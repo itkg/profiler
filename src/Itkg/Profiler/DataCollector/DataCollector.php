@@ -2,9 +2,7 @@
 
 namespace Itkg\Profiler\DataCollector;
 
-use Itkg\Core\ServiceContainer;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Pascal DENIS <pascal.denis@businessdecision.com>
@@ -60,9 +58,6 @@ abstract class DataCollector implements DataCollectorInterface
      */
     public function getStats()
     {
-        /**
-         * @fixme : change method place
-         */
         $this->createStats();
 
         return $this->stats;
@@ -120,7 +115,7 @@ abstract class DataCollector implements DataCollectorInterface
      */
     protected function addData(array $values = array(), $key = null)
     {
-        if (null == $key) {
+        if (null === $key) {
             $key = $this->getRequest()->getPathInfo();
         }
 

@@ -52,7 +52,7 @@ class ServiceProvider implements ServiceProviderInterface
         );
 
         $container['profiler_manager'] = $mainContainer->share(
-            function ($container) use ($mainContainer) {
+            function ($container) {
                 return new ProfilerManager(
                     $container['profiler']
                 );
@@ -72,7 +72,7 @@ class ServiceProvider implements ServiceProviderInterface
         );
 
         $container['listener'] = $mainContainer->share(
-            function () use ($container) {
+            function ($container) {
                 return new ProfilerListener($container['profiler']);
             }
         );
