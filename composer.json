@@ -24,7 +24,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "itkg/core": "dev-master",
+        "itkg/core": "~1",
         "symfony/http-foundation": "~2",
         "symfony/http-kernel": "~2"
     },
