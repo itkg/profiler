@@ -15,7 +15,14 @@ interface DataCollectorInterface
     public function getName();
 
     /**
-     * Collect some data
+     * Start collect (if needed)
+     *
+     * @return void
+     */
+    public function start();
+
+    /**
+     * Collect some data (stop)
      */
     public function collect();
 

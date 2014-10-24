@@ -5,6 +5,7 @@ namespace Itkg\Profiler\Listener;
 use Itkg\Profiler\ProfilerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -52,7 +53,8 @@ class ProfilerListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::FINISH_REQUEST => 'onFinish'
+            KernelEvents::FINISH_REQUEST => 'onFinish',
+            KernelEvents::REQUEST        => 'onStart'
         );
     }
 
@@ -63,6 +65,16 @@ class ProfilerListener implements EventSubscriberInterface
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $this->profiler->profile($event->getRequest());
+        }
+    }
+
+    /**
+     * @param GetResponseEvent $event
+     */
+    public function onStart(GetResponseEvent $event)
+    {
+        if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
+            $this->profiler->start();
         }
     }
 

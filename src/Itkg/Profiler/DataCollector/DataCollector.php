@@ -75,9 +75,17 @@ abstract class DataCollector implements DataCollectorInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return ucfirst($this->getName());
+    }
+
+    /**
      * Create stats from current set of data
      */
-    private function createStats()
+    protected function createStats()
     {
         $key = date('d/m/Y à h:i');
         foreach ($this->data as $k => $data) {
@@ -86,14 +94,6 @@ abstract class DataCollector implements DataCollectorInterface
                 'count' => sizeof($data),
             );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return ucfirst($this->getName());
     }
 
     /**
@@ -146,4 +146,15 @@ abstract class DataCollector implements DataCollectorInterface
 
         return $this;
     }
+
+    /**
+     * No start action by default
+     *
+     * @return void
+     */
+    public function start()
+    {
+
+    }
+
 }

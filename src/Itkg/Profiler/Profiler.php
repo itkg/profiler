@@ -79,7 +79,24 @@ class Profiler implements ProfilerInterface
     }
 
     /**
-     * Start profiler by executing data collectors (collect & save)
+     * Start profiler by executing data collectors (start)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function start()
+    {
+        foreach ($this->collectors as $collector) {
+            // Get data from storage
+            $this->storage->load($collector);
+            // Start collect data
+
+            $collector->start();
+        }
+    }
+
+    /**
+     * End profiler by executing data collectors (collect & save)
      *
      * @param Request $request
      * @return void
@@ -90,16 +107,12 @@ class Profiler implements ProfilerInterface
             if ($collector instanceof DataCollector) {
                 $collector->setRequest($request);
             }
-            // Get data from storage
-            $this->storage->load($collector);
 
             // Start collect data
             $collector->collect();
 
             // Set storage data
             $this->storage->save($collector);
-
-            // Stats ?
         }
     }
 }
