@@ -49,8 +49,20 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         $profiler->addCollector($collectorStub);
 
         $collectorStub->expects($this->once())->method('collect');
-        $storageStub->expects($this->once())->method('load');
         $storageStub->expects($this->once())->method('save');
         $profiler->profile(Request::createFromGlobals());
+    }
+
+    public function testStart()
+    {
+        $collectorStub = $this->getMock('Itkg\Profiler\DataCollector\CacheDataCollector');
+        $storageStub   = $this->getMock('Itkg\Profiler\Storage\FileStorage', array(), array('data'));
+
+        $profiler = new Profiler($storageStub);
+        $profiler->addCollector($collectorStub);
+
+        $collectorStub->expects($this->once())->method('start');
+        $storageStub->expects($this->once())->method('load');
+        $profiler->start();
     }
 } 
