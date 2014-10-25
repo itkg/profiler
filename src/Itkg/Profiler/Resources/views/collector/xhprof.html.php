@@ -73,7 +73,7 @@
                                 pointHighlightStroke: "rgba(151,187,205,1)",
                                 data: _dataPMU
                             },
-                        ],
+                        ]
                     };
 
                     var myNewChart = new Chart(ctx).Line(data);
