@@ -27,8 +27,8 @@
                         <td class="numeric"><?= $row['ct'] ?></td>
                         <td class="numeric"><?= $row['wt'] ?></td>
                         <td class="numeric"><?= $row['cpu'] ?></td>
-                        <td class="numeric"><?= ($row['mu'] / 8000000) ?></td>
-                        <td class="numeric"><?= ($row['pmu'] / 8000000) ?></td>
+                        <td class="numeric"><?= ($row['mu'] / 1000000) ?></td>
+                        <td class="numeric"><?= ($row['pmu'] / 1000000) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -46,8 +46,8 @@
                     <?php $i = 0; ?>
                     <?php foreach ($stats as $stat) : ?>
                     _labels[<?= $i ?>] = "<?= $stat['date'] ?>";
-                    _dataMU[<?= $i ?>]   = <?= $stat['memory'] / 8000000 ?>;
-                    _dataPMU[<?= $i ?>]   = <?= $stat['peak_memory'] / 8000000 ?>;
+                    _dataMU[<?= $i ?>]   = <?= $stat['memory'] / 1000000 ?>;
+                    _dataPMU[<?= $i ?>]   = <?= $stat['peak_memory'] / 1000000 ?>;
                     <?php $i++; ?>
                     <?php endforeach; ?>
                     var data = {
