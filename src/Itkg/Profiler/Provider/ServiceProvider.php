@@ -5,6 +5,7 @@ namespace Itkg\Profiler\Provider;
 use Itkg\Core\Provider\ServiceProviderInterface;
 use Itkg\Profiler\DataCollector\CacheDataCollector;
 use Itkg\Profiler\DataCollector\DatabaseDataCollector;
+use Itkg\Profiler\DataCollector\ListenerDataCollector;
 use Itkg\Profiler\DataCollector\XhprofDataCollector;
 use Itkg\Profiler\Listener\ProfilerListener;
 use Itkg\Profiler\Manager\ProfilerManager;
@@ -63,6 +64,12 @@ class ServiceProvider implements ServiceProviderInterface
         $container['collector.cache'] = $mainContainer->share(
             function () {
                 return new CacheDataCollector();
+            }
+        );
+
+        $container['collector.listener'] = $mainContainer->share(
+            function () use ($mainContainer) {
+                return new ListenerDataCollector($mainContainer['core']['dispatcher']);
             }
         );
 
