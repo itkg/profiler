@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class Installer
 {
-    const EXTRA_ASSET_DIR = 'itkg_debug_asset_dir';
+    const EXTRA_ASSET_DIR = 'itkg_profiler_asset_dir';
 
     /**
      * Copy assets into you assets directory
@@ -25,10 +25,11 @@ class Installer
         if (!isset($extra[self::EXTRA_ASSET_DIR])) {
             return;
         }
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
 
         $fs = new Filesystem();
         $fs->mirror(
-            __DIR__ . '/../Resources/public',
+            $vendorDir . '/itkg/profiler/Itkg/Profiler/Resources/public',
             $extra[self::EXTRA_ASSET_DIR] . '/vendor/itkg/profiler/assets'
         );
     }
