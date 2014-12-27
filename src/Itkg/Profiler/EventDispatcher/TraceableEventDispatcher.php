@@ -107,8 +107,9 @@ class TraceableEventDispatcher extends EventDispatcher implements TraceableEvent
      */
     protected function addCalledListeners($eventName, array $listeners = array())
     {
-        foreach ($listeners as $listener) {
-            $this->calledListeners[$eventName][] = $listener;
+        foreach ($listeners as $listenerInfo) {
+
+            $this->calledListeners[$eventName][] = $listenerInfo;
         }
     }
 }

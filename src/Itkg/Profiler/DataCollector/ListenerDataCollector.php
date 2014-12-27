@@ -35,14 +35,14 @@ class ListenerDataCollector extends DataCollector
     public function collect()
     {
         $data = array();
-
         foreach ($this->dispatcher->getCalledListeners() as $eventName => $listeners) {
+
             $row = array(
                 'eventName' => $eventName,
                 'listeners' => array()
             );
-            foreach ($listeners as $listener) {
-                $row['listeners'][] = get_class($listener);
+            foreach ($listeners as $listenerInfo) {
+                $row['listeners'][] = array('class' => get_class($listenerInfo[0]), 'method' => $listenerInfo[1]);
             }
 
             $data[] = $row;
