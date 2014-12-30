@@ -86,7 +86,9 @@ class TraceableEventDispatcher extends EventDispatcher implements TraceableEvent
      */
     public function dispatch($eventName, Event $event = null)
     {
-        $this->addCalledListeners($eventName, $this->getListeners($eventName));
+        if ($listeners = $this->getListeners($eventName)) {
+            $this->addCalledListeners($eventName, $listeners);
+        }
 
         $this->dispatcher->dispatch($eventName, $event);
 
