@@ -104,8 +104,8 @@ class CacheDataCollector extends DataCollector implements EventSubscriberInterfa
     public static function getSubscribedEvents()
     {
         return array(
-            'cache.load' => 'onCacheLoad',
-            'cache.set' => 'onCacheSet',
+            'cache.load'   => 'onCacheLoad',
+            'cache.set'    => 'onCacheSet',
             'cache.remove' => 'onCacheRemove'
         );
     }

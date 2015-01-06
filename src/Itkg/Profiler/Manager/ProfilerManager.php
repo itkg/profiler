@@ -2,7 +2,6 @@
 
 namespace Itkg\Profiler\Manager;
 
-
 use Itkg\Profiler\DataCollector\DataCollectorInterface;
 use Itkg\Profiler\Profiler;
 
